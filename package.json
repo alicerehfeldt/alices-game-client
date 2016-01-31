@@ -1,0 +1,9 @@
+{
+  "name": "alices-game-client",
+  "repository": "https://github.com/alicerehfeldt/alices-game-client",
+  "license": "none",
+  "version": "0.0.0",
+  "devDependencies": {
+    "webpack": "latest"
+  }
+}
