@@ -1,3 +1,9 @@
+/**
+ * This is a fake game server that can be run in the same window as the client.
+ * It simulates a two-person game with the other player rolling after two seconds.
+ */
+
+
 module.exports = function(runner, gameDiv) {
 
   let currentPlayer = 34;
