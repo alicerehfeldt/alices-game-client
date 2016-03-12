@@ -8,7 +8,7 @@ Games are included in the `src/games/` folder. The folder name is used as the `t
 
 ## Game API
 
-The main interface for games is implemented in the [`Game` class](src/class-game.js). Each instance of a `Game` represents the client for a single player.
+The main interface for games is implemented in the [`Game` class](src/class-game.js) which you should inherit from in your game class. Each instance of a `Game` represents the client for a single player.
 
 ### Properties
 
