@@ -28,6 +28,8 @@ The default location where game data is stored.
 The current player's information, an instance of the [Player](#player) object.
 
 #### `Game#constructor`
+By default, sets up the three parameters as properties on the Game instance then calls `Game.initialSetup()`. We recommend just extending `initialSetup()` and leaving this be.
+
 * `@param {HTMLElement} element` - The root HTMLElement for the game
 * `@param {Object} initialGameData` - The initial game data
 * `@param {Object} player` - The player object for the player represented by this instance of the class.
