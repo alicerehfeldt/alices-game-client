@@ -12,7 +12,7 @@ The main interface for games is implemented in the [`Game` class](src/class-game
 
 ### Properties
 
-These properties are set up in the [default constructor](src/class-game.js#L8]. Normally you should not need to override the constructor, but usage of these is not mandatory, do what you want.
+These properties are set up in the [default constructor](src/class-game.js#L8). Normally you should not need to override the constructor, but usage of these is not mandatory, do what you want.
 
 #### `Game.element`
 The root `HTMLElement` for your game. It will look like this:
