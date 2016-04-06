@@ -25,7 +25,7 @@ module.exports = function(runner, gameDiv) {
     turn: players[44]
   }
 
-  let {game, element} = runner.createGame('example', gameData, players[currentPlayer]);
+  let {game, element} = runner.setupGame('example', gameData, players[currentPlayer]);
   gameDiv.appendChild(element);
 
   let lauraTurnTime = 1000;
