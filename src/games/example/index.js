@@ -46,15 +46,18 @@ class Example extends Game {
       newRollsHTML += `<div>${roll['player']} rolled a ${roll['roll']}</div>`;
     });
     rollsEl.innerHTML = newRollsHTML;
-    // If we have a winner
-    if (this.gameData.winner) {
-      currentTurnEl.innerHTML = `${this.gameData.winner.name} wins!`;
-    } else {
-      // Show whose turn it is
-      let currentTurn = this.gameData.turn;
-      let name = (currentTurn.id === this.player.id) ? "your" : `${currentTurn.name}'s`;
-      currentTurnEl.innerHTML = `It is ${name} turn`;
-    }
+
+    // Show whose turn it is
+    let currentTurn = this.gameData.turn;
+    let name = (currentTurn.id === this.player.id) ? "your" : `${currentTurn.name}'s`;
+    currentTurnEl.innerHTML = `It is ${name} turn`;
+  }
+
+  gameOver(data) {
+    this.gameData = data;
+    this.render();
+    let currentTurnEl = this.element.querySelector('#example-turn');
+    currentTurnEl.innerHTML = `${this.gameData.winner.name} wins!`;
   }
 }
 

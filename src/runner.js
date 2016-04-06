@@ -4,15 +4,18 @@ require('base.styl');
 const requireGame = require.context('games', true);
 
 class Runner {
-  constructor (playerData) {
+  constructor (gameElement, playerData) {
+    this.gameElement = gameElement;
     this.playerData = playerData;
-    this.socket = SocketIOClient('http://localhost:3000');
+    this.currentGame = null;
+    this.socket = SocketIOClient('http://yrmom.com:3000');
     this._attachSocketListeners();
   }
 
   _attachSocketListeners() {
     this.socket.on('connect', () => {
       console.log('CONNECTED');
+      this.clearGameElement();
     });
     this.socket.on('needPlayerData', () => {
       this.socket.emit('sendPlayerData', this.playerData);
@@ -25,29 +28,48 @@ class Runner {
 
     this.socket.on('notAttachedToGame', () => {
       console.log('notAttachedToGame');
-      let game = {
-        type: 'example', 
-        playerIds: [34, 44]
-      }
-      this.socket.emit('createGame', game);
+      // TODO: Show game select here?
     });
 
     this.socket.on('connectedToGame', (data) => {
       console.log('connectedToGame', data);
       let type = data.type;
       let gameData = data.gameData;
-      this.setupGame(type, gameData);
+      let game = this.setupGame(type, gameData);
+      this.currentGame = game.game;
+      this.clearGameElement();
+      this.gameElement.appendChild(game.element);
     });
 
     this.socket.on('gameDataUpdate', (data) => {
-      console.log('gameDataUpdate', data);
+      if (!this.currentGame) {
+        return;
+      }
+      console.log('gameDataUpdate', data, this.currentGame);
+      this.currentGame.gameDataUpdate(data);
     });
 
     this.socket.on('inputRequested', (data) => {
-      console.log('inputRequested', data);
+      if (!this.currentGame) {
+        return;
+      }
+      console.log('inputRequested', data, this.currentGame);
+      this.currentGame.inputRequested(this.sendInput.bind(this), data);
+    });
+
+    this.socket.on('gameOver', (data) => {
+      if (!this.currentGame) {
+        return;
+      }
+      console.log('gameOver', data, this.currentGame);
+      this.currentGame.gameOver(data);
     });
   }
 
+  sendInput(playerResponse) {
+    console.log('sendInput', playerResponse);
+    this.socket.emit('playerInput', playerResponse);
+  }
 
   setupGame (type, initialData) {
     try {
@@ -67,7 +89,19 @@ class Runner {
     }
   }
 
+  clearGameElement() {
+    this.gameElement.innerHTML = '';
+  }
+
   
+  _debugCreateGame() {
+    let game = {
+      type: 'example', 
+      playerIds: [34, 44]
+    }
+    this.socket.emit('createGame', game);
+  }
+
 }
 
 export default Runner;

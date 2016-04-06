@@ -23,7 +23,19 @@ import Runner from 'runner';
   }
   console.log(player);
 
-  const runner = new Runner(player);
+  const runner = new Runner(gameDiv, player);
+
+
+  let startGame = document.createElement('BUTTON');
+  startGame.id="DEBUGBUTTON";
+  startGame.innerText = 'Start Game';
+  startGame.addEventListener('click', function(){
+    runner._debugCreateGame();
+  });
+  document.body.appendChild(startGame);
+
+
+
 
   // require('games/example/test-fake-server.js')(runner, gameDiv);
 })();

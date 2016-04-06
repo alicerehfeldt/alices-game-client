@@ -49,6 +49,12 @@ A callback when the game is requesting the current player's input. This might me
 * `@param {Function} respond` - Method to send the player's response back to the server as JSON (`respond(playerResponse)`)
 * `@param {Object} data` - A JSON object with more context about what kind of input the game is requesting
 
+#### `Game#gameOver(data)`
+
+A callback when the server sends a Game Over signal
+
+* `@param {Object} data` - Info about the game over state
+
 ### `Player`
 The default object format and mandatory fields for player data:
 

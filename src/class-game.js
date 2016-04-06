@@ -45,5 +45,15 @@ class Game {
 
         // Call respond() and pass response as JSON once player responds
     }
+
+    /**
+     * gameOver
+     * Callback called when the game sends a game over signal
+     * @param {Object} data - A final bit of game data
+     * @return {void}
+     */
+     gameOver(data) {
+      
+     }
 }
 export default Game;
